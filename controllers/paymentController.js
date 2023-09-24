@@ -69,7 +69,7 @@ const paymentController = {
         razorpay_payment_id,
         razorpay_signature,
       });
-      res.redirect(`http://localhost:3000/paymentsuccess?reference=${razorpay_payment_id}}`);
+      res.redirect(`https://app-themosho.netlify.app/paymentsuccess?reference=${razorpay_payment_id}}`);
       // res.json({ success: true });
     } else {
       res.status(400).json({

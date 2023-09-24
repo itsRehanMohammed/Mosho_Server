@@ -6,6 +6,7 @@ const productSchema = Joi.object().keys({
   price: Joi.number().required(),
   description: Joi.string().required(),
   coupon_code: Joi.string(),
+  isPopularproduct: Joi.boolean(),
 });
 
 export default productSchema;

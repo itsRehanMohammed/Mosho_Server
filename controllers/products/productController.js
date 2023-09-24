@@ -44,7 +44,7 @@ const productController = {
 
       console.log(req.body);
 
-      const { product_name, price, description, coupon_code, category } = req.body;
+      const { product_name, price, description, coupon_code, category, isPopularproduct } = req.body;
       let document;
       try {
         document = await Product.create({
@@ -55,6 +55,7 @@ const productController = {
 
           coupon_code,
           category,
+          isPopularproduct,
           image: filePath,
         });
       } catch (err) {
