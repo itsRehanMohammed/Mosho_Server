@@ -6,9 +6,14 @@ let pincodes_pin = [400088, 400021, 400089];
 const pincodeController = {
   // API endpoint to add a pin code
   addPincode(req, res) {
+    // Ensure that the received value is a number
+    const { pincode } = req.body;
+    if (isNaN(pincode)) {
+      return res.status(400).json({ success: false, message: "Pin code must be a valid number." });
+    }
+
     // Define Joi schema for pin code validation
     const pincodeSchema = Joi.number().integer().positive().required();
-    const { pincode } = req.body;
 
     // Validate the incoming pin code using Joi
     const { error } = pincodeSchema.validate(pincode);
