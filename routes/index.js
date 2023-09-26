@@ -26,7 +26,7 @@ router.get("/api/getkey", (req, res) => {
 });
 router.get("/api/pincode", pincodeController.store);
 router.post("/api/addpincode", pincodeController.addPincode);
-router.delete("/api/deletepincode", pincodeController.deletePincode);
+router.post("/api/deletepincode", pincodeController.deletePincode);
 router.post("/api/addProduct", [auth, admin], productController.store);
 router.put("/api/product/:id", [auth, admin], productController.update);
 router.delete("/api/product/:id", [auth, admin], productController.delete);
