@@ -6,6 +6,7 @@ let restaurant = true;
 const storeController = {
   // API endpoint to add a pin code
   door(req, res) {
+    res.header("Access-Control-Allow-Origin", "*");
     // Define Joi schema for store validation
     const storeSchema = Joi.boolean().required();
     const { restaurantAvailable } = req.body;
