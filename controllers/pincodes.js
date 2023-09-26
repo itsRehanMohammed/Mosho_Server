@@ -29,7 +29,22 @@ const pincodeController = {
     // Return a success response
     res.status(200).json({ success: true, message: "Pin code added successfully!", pincode });
   },
+  // API endpoint to delete a pin code
+  deletePincode(req, res) {
+    const { index } = req.body;
+    const indexToDelete = parseInt(index);
 
+    // Check if the index is valid
+    if (isNaN(indexToDelete) || indexToDelete < 0 || indexToDelete >= pincodes_pin.length) {
+      return res.status(400).json({ success: false, message: "Invalid index." });
+    }
+
+    // Remove the pin code from the array by index
+    const deletedPincode = pincodes_pin.splice(indexToDelete, 1)[0];
+
+    // Return a success response
+    res.status(200).json({ success: true, message: "Pin code deleted successfully!", pincode: deletedPincode });
+  },
   // API endpoint to retrieve the list of pin codes
   store: (req, res) => {
     res.status(200).json(pincodes_pin);
