@@ -6,6 +6,7 @@ import auth from "../middlewares/auth";
 import admin from "../middlewares/admin";
 import multer from "multer";
 import pincodeController from "../controllers/pincodes";
+import storeController from "../controllers/store";
 
 // router.get("/", (req, res) => {
 //   res.send("HI MY Name Rehan");
@@ -24,6 +25,8 @@ router.post("/paymentverification", paymentController.paymentVerification);
 router.get("/api/getkey", (req, res) => {
   res.status(200).json({ key: RAZORPAY_API_KEY });
 });
+router.get("/api/restaurant", storeController.store);
+router.post("/api/doorrestaurant", storeController.door);
 router.get("/api/pincode", pincodeController.store);
 router.post("/api/addpincode", pincodeController.addPincode);
 router.post("/api/deletepincode", pincodeController.deletePincode);
