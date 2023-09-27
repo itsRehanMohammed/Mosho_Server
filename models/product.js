@@ -1,6 +1,5 @@
-import { boolean } from "joi";
 import mongoose from "mongoose";
-import { APP_URL } from "../config";
+import { PROD_URL } from "../config";
 const Schema = mongoose.Schema;
 
 const productSchema = new Schema(
@@ -13,7 +12,7 @@ const productSchema = new Schema(
       get: (image) => {
         // http://localhost:5000/uploads/1616443169266-52350494.png
 
-        return `${APP_URL}/${image}`;
+        return `${PROD_URL}/${image}`;
       },
     },
     price: { type: Number, required: true },
