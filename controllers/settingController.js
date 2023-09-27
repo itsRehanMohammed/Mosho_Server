@@ -7,12 +7,12 @@ const settingsController = {
       const { pincode } = req.body;
 
       // Validate the incoming pincode value
-      if (typeof pincode !== "number") {
-        return res.status(400).json({
-          success: false,
-          message: "Invalid pincode value.",
-        });
-      }
+      //   if (typeof pincode !== "number") {
+      //     return res.status(400).json({
+      //       success: false,
+      //       message: "Invalid pincode value.",
+      //     });
+      //   }
 
       // Find the existing settings document or create a new one if it doesn't exist
       let settings = await Settings.findOne();
