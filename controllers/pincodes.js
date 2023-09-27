@@ -1,54 +1,104 @@
-const Joi = require("joi");
+// const Joi = require("joi");
+// // import { Pincode } from ".././models/settings"; // Import your Pincode schema
 
-// Sample existing pin codes array
-let pincodes_pin = [];
+// const pincodeController = {
+//   // API endpoint to add a pin code
+//   async addPincode(req, res) {
+//     try {
+//       // Define Joi schema for pin code validation
+//       const pincodeSchema = Joi.number().integer().positive().required();
+//       const { pincode } = req.body;
 
-const pincodeController = {
-  // API endpoint to add a pin code
-  addPincode(req, res) {
-    // Define Joi schema for pin code validation
-    const pincodeSchema = Joi.number().integer().positive().required();
-    const { pincode } = req.body;
+//       // Validate the incoming pin code using Joi
+//       const { error } = pincodeSchema.validate(pincode);
 
-    // Validate the incoming pin code using Joi
-    const { error } = pincodeSchema.validate(pincode);
+//       if (error) {
+//         // Return a validation error response
+//         return res
+//           .status(400)
+//           .json({ success: false, message: error.details[0].message });
+//       }
 
-    if (error) {
-      // Return a validation error response
-      return res.status(400).json({ success: false, message: error.details[0].message });
-    }
+//       // Check if the pin code already exists in the database
+//       const existingPincode = await Pincode.findOne({ pincode });
 
-    // Check if the pin code already exists in the array
-    if (pincodes_pin.includes(pincode)) {
-      return res.status(400).json({ success: false, message: "Pin code already exists." });
-    }
+//       if (existingPincode) {
+//         return res
+//           .status(400)
+//           .json({ success: false, message: "Pin code already exists." });
+//       }
 
-    // Add the pin code to the array
-    pincodes_pin.push(pincode);
+//       // Create a new Pincode document and save it to the database
+//       const newPincode = new Pincode({ pincode });
+//       await newPincode.save();
 
-    // Return a success response
-    res.status(200).json({ success: true, message: "Pin code added successfully!", pincode });
-  },
-  // API endpoint to delete a pin code
-  deletePincode(req, res) {
-    const { index } = req.body;
-    const indexToDelete = parseInt(index);
+//       // Return a success response
+//       res.status(200).json({
+//         success: true,
+//         message: "Pin code added successfully!",
+//         pincode,
+//       });
+//     } catch (error) {
+//       console.error("Error adding pincode:", error);
+//       res
+//         .status(500)
+//         .json({ success: false, message: "Internal server error." });
+//     }
+//   },
 
-    // Check if the index is valid
-    if (isNaN(indexToDelete) || indexToDelete < 0 || indexToDelete >= pincodes_pin.length) {
-      return res.status(400).json({ success: false, message: "Invalid index." });
-    }
+//   // API endpoint to retrieve the list of pin codes
+//   async store(req, res) {
+//     try {
+//       // Fetch all pincodes from the database
+//       const pincodes = await Pincode.find({}, { _id: 0, __v: 0 });
 
-    // Remove the pin code from the array by index
-    const deletedPincode = pincodes_pin.splice(indexToDelete, 1)[0];
+//       // Return the list of pincodes
+//       res.status(200).json(pincodes);
+//     } catch (error) {
+//       console.error("Error fetching pincodes:", error);
+//       res
+//         .status(500)
+//         .json({ success: false, message: "Internal server error." });
+//     }
+//   },
 
-    // Return a success response
-    res.status(200).json({ success: true, message: "Pin code deleted successfully!", pincode: deletedPincode });
-  },
-  // API endpoint to retrieve the list of pin codes
-  store: (req, res) => {
-    res.status(200).json(pincodes_pin);
-  },
-};
+//   // API endpoint to delete a pin code by index
+//   async deletePincode(req, res) {
+//     try {
+//       const { index } = req.params;
+//       const indexToDelete = parseInt(index);
 
-export default pincodeController;
+//       // Check if the index is valid
+//       if (isNaN(indexToDelete) || indexToDelete < 0) {
+//         return res
+//           .status(400)
+//           .json({ success: false, message: "Invalid index." });
+//       }
+
+//       // Find the pin code to delete
+//       const deletedPincode = await Pincode.findOneAndDelete({
+//         index: indexToDelete,
+//       });
+
+//       if (!deletedPincode) {
+//         return res
+//           .status(400)
+//           .json({ success: false, message: "Invalid index." });
+//       }
+
+//       // Return a success response
+//       res.status(200).json({
+//         success: true,
+//         message: "Pin code deleted successfully!",
+//         pincode: deletedPincode,
+//       });
+//     } catch (error) {
+//       console.error("Error deleting pincode:", error);
+//       res
+//         .status(500)
+//         .json({ success: false, message: "Internal server error." });
+//     }
+//   },
+// };
+
+// export default pincodeController;
