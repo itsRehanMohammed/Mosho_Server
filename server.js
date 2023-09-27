@@ -1,4 +1,9 @@
-import { APP_PORT, DB_URL, RAZORPAY_API_KEY, RAZORPAY_API_SECRET } from "./config";
+import {
+  APP_PORT,
+  DB_URL,
+  RAZORPAY_API_KEY,
+  RAZORPAY_API_SECRET,
+} from "./config";
 import express, { urlencoded } from "express";
 const app = express();
 import errorHandler from "./middlewares/errorHandler";
@@ -23,7 +28,7 @@ export const instance = new Razorpay({
   key_secret: RAZORPAY_API_SECRET,
 });
 
-global.appRoot = path.resolve(__dirname);
+global.appRoot = "https://mosho.onrender.com";
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
