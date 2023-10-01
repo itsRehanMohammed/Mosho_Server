@@ -15,6 +15,19 @@ const userController = {
       return next(error);
     }
   },
+  async users(req, res, next) {
+    // res.send("me");
+
+    try {
+      const users = await User.find().select("-password -updatedAt -__v");
+      if (!users) {
+        return next(CustomErrorHandler.notFound());
+      }
+      res.json(users);
+    } catch (error) {
+      return next(error);
+    }
+  },
 };
 
 export default userController;

@@ -1,16 +1,7 @@
 import express from "express";
 import { RAZORPAY_API_KEY } from "../config";
 const router = express.Router();
-import {
-  orderController,
-  registerController,
-  loginController,
-  userController,
-  refreshController,
-  logoutController,
-  paymentController,
-  productController,
-} from "../controllers";
+import { orderController, registerController, loginController, userController, refreshController, logoutController, paymentController, productController } from "../controllers";
 import auth from "../middlewares/auth";
 import admin from "../middlewares/admin";
 import multer from "multer";
@@ -23,6 +14,7 @@ import settingsController from "../controllers/settingController";
 router.post("/api/register", registerController.register);
 router.post("/api/login", loginController.login);
 router.get("/api/me", auth, userController.me);
+router.get("/api/users", userController.users);
 router.post("/api/refresh", refreshController.refreshToken);
 router.post("/api/logout", auth, logoutController.logout);
 router.post("/api/checkout", paymentController.checkout);
